@@ -18,6 +18,5 @@ public class Mouvements : MonoBehaviour
         float angleDeg = angleRad * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleDeg));
-        Debug.DrawLine(transform.position, mouseWorldPos, Color.red);
     }
 }
