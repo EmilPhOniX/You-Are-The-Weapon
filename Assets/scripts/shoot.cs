@@ -9,7 +9,7 @@ public class shoot : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating(nameof(ShootBullet), 0f, spawnInterval);
+        InvokeRepeating(nameof(ShootBullet), 1f, spawnInterval);
     }
 
     void ShootBullet()
