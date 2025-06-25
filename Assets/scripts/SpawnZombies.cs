@@ -7,9 +7,6 @@ public class SpawnZombies : MonoBehaviour
     [SerializeField] private GameObject zombiePrefab;
     [SerializeField] private float spawnInterval = 3f;
     
-    [Header("Game Settings")]
-    [SerializeField] private int playerHealth = 100;
-    [SerializeField] private int score = 0;
     void Start()
     {
         InvokeRepeating("SpawnLoop", 0f, spawnInterval);
