@@ -104,18 +104,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2526359768897291210, guid: 856bd63cea515c649b27c07e043fa210, type: 3}
-  speed: 0.3
-  SpritesWithProbabilities:
+  speed: 1
+  randomSprites:
   - sprite: {fileID: -5782521184205631276, guid: cc66f36fa0673764ab6927376159905c, type: 3}
-    probability: 0.8
-  - sprite: {fileID: -4123218166711040169, guid: 1f1252086deb1a2459c638631aed85f1, type: 3}
-    probability: 0.5
+    probability: 0.6
   - sprite: {fileID: -1142085365090978888, guid: 59f3504d841418245ba673fc1fe0de04, type: 3}
-    probability: 0.35
+    probability: 0.3
+  - sprite: {fileID: -4123218166711040169, guid: 1f1252086deb1a2459c638631aed85f1, type: 3}
+    probability: 0.3
   - sprite: {fileID: -7983287690273846126, guid: 4736510f1c678d0458fe3a6c4095b34c, type: 3}
-    probability: 0.2
+    probability: 0.1
   - sprite: {fileID: 320186988785587723, guid: 5062aa371ddc3aa429a47df65998031a, type: 3}
     probability: 0.05
+  scoreNGold: {fileID: 0}
 --- !u!114 &2482193315270831924
 MonoBehaviour:
   m_ObjectHideFlags: 0

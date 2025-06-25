@@ -9,6 +9,7 @@ public class DestructionOnHit : MonoBehaviour
         if (other.CompareTag(targetTag))
         {
             Destroy(gameObject);
+            Destroy(other.gameObject);
         }
     }
 }
