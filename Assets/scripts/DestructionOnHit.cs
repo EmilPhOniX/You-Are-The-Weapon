@@ -6,10 +6,16 @@ public class DestructionOnHit : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(targetTag))
+        Zombie zombie = GetComponent<Zombie>();
+        if (zombie != null)
+        {
+            zombie.Die();
+        }
+        else
         {
             Destroy(gameObject);
-            Destroy(other.gameObject);
         }
+
+        Destroy(other.gameObject);
     }
 }

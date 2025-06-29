@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -17,13 +18,10 @@ public class Zombie : MonoBehaviour
     [SerializeField] private float speed = 2f;
 
 
-    [Header("Visuals")]
+    [Header("Sprites")]
     [SerializeField] private RandomSprite[] randomSprites;
 
-
-    [Header("References")]
-    [SerializeField] private ScoreNGold scoreNGold;
-
+    private ScoreNGold scoreNGold;
     private SpriteRenderer spriteRenderer;
 
     void Awake()
@@ -34,6 +32,14 @@ public class Zombie : MonoBehaviour
     void Start()
     {
         InitializeSprite();
+        if (scoreNGold == null)
+        {
+            scoreNGold = FindFirstObjectByType<ScoreNGold>();
+            if (scoreNGold == null)
+            {
+                Debug.LogError("ScoreNGold component not found in the scene.");
+            }
+        }
     }
 
     void Update()
@@ -85,7 +91,7 @@ public class Zombie : MonoBehaviour
             return randomSprites[0].Sprite;
         }
         
-        float randomValue = Random.Range(0f, totalProbability);
+        float randomValue = UnityEngine.Random.Range(0f, totalProbability);
         float currentProbability = 0f;
         
         foreach (var spriteProb in randomSprites)
@@ -112,8 +118,12 @@ public class Zombie : MonoBehaviour
     
     private void GrantLootReward()
     {
-        if (scoreNGold == null) return;
-        
+        if (scoreNGold == null)
+        {
+            Debug.LogWarning("ScoreNGold reference is not set. Cannot grant loot reward.");
+            return;   
+        }        
+
         var zombieReward = ZombieReward.GenerateRandom();
         scoreNGold.AddSnG(zombieReward.Score, zombieReward.Gold);
     }
@@ -122,6 +132,7 @@ public class Zombie : MonoBehaviour
     {
         GrantLootReward();
         Destroy(gameObject);
+        Console.WriteLine("Zombie died");
     }
 }
 
@@ -142,8 +153,8 @@ public struct ZombieReward
     
     public static ZombieReward GenerateRandom()
     {
-        int randomScore = Random.Range(1, 5);
-        int calculatedGold = Mathf.RoundToInt(randomScore * 0.5f);
+        int randomScore = UnityEngine.Random.Range(1, 5);
+        int calculatedGold = Mathf.RoundToInt(randomScore * 0.7f);
         
         return new ZombieReward(randomScore, calculatedGold);
     }

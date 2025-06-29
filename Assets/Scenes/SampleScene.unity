@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 74093813}
   - component: {fileID: 74093812}
   m_Layer: 5
-  m_Name: Money
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 1073421362}
   - component: {fileID: 1073421361}
   m_Layer: 5
-  m_Name: Money text
+  m_Name: Gold text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Money
+  m_text: Gold
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -965,7 +965,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1109494940}
   m_Layer: 5
-  m_Name: Money data
+  m_Name: Gold data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1244,8 +1244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28208836bc24442b5af298fc55b918d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 100
-  score: 0
+  scoreText: {fileID: 19642404}
+  goldText: {fileID: 1073421361}
 --- !u!1 &1499943039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1258,7 @@ GameObject:
   - component: {fileID: 1499943042}
   - component: {fileID: 1499943041}
   m_Layer: 5
-  m_Name: Score Money Panel
+  m_Name: Score Gold Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
