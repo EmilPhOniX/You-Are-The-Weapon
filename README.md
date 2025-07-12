@@ -27,7 +27,7 @@ Upgrade yourself by killing zombies to deal more damage and survive longer.
 ## Authors
 
 - Developed by [EmilPhOniX](https://www.github.com/emilphonix)
-- Designed by Agathe Marconnet
+- Designed by **Agathe Marconnet**
 
 ## Installation
 
