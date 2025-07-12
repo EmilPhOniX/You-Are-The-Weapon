@@ -4,15 +4,18 @@ using System.Collections.Generic;
 public class DifficultyManager : MonoBehaviour
 {
     [Header("Difficulty Settings")]
+    [SerializeField] private float difficultyInterval = 5f;
+    
+    [Header("Speed Scaling")]
     [SerializeField] private float baseZombieSpeed = 2f;
     [SerializeField] private float speedIncrement = 0.1f;
-    [SerializeField] private float difficultyInterval = 5f;
+    [SerializeField] private float maxZombieSpeed = 10f; // Vitesse maximale des zombies
     
     [Header("Spawn Rate Scaling")]
     [SerializeField] private bool scaleSpawnRate = true;
     [SerializeField] private float spawnRateDecrease = 0.1f; // Diminution de l'intervalle de spawn
     [SerializeField] private float minSpawnInterval = 0.5f; // Intervalle minimum
-    
+
     public static DifficultyManager Instance { get; private set; }
     
     private float currentSpeedMultiplier = 1f;
@@ -20,7 +23,7 @@ public class DifficultyManager : MonoBehaviour
     private List<Zombie> activeZombies = new List<Zombie>();
     private List<SpawnZombies> spawners = new List<SpawnZombies>();
     
-    public float CurrentZombieSpeed => baseZombieSpeed * currentSpeedMultiplier;
+    public float CurrentZombieSpeed => Mathf.Min(baseZombieSpeed * currentSpeedMultiplier, maxZombieSpeed);
     public float CurrentSpawnRateMultiplier => currentSpawnRateMultiplier;
     
     void Awake()
@@ -44,16 +47,30 @@ public class DifficultyManager : MonoBehaviour
     
     private void IncreaseDifficulty()
     {
-        currentSpeedMultiplier += speedIncrement;
-        UpdateAllZombiesSpeed();
+        // Limiter l'augmentation de vitesse
+        float newSpeed = baseZombieSpeed * (currentSpeedMultiplier + speedIncrement);
+        if (newSpeed <= maxZombieSpeed)
+        {
+            currentSpeedMultiplier += speedIncrement;
+            UpdateAllZombiesSpeed();
+        }
         
         if (scaleSpawnRate)
         {
-            currentSpawnRateMultiplier += spawnRateDecrease;
-            UpdateAllSpawnersRate();
+            float newSpawnRateMultiplier = currentSpawnRateMultiplier + spawnRateDecrease;
+            if (newSpawnRateMultiplier <= GetMaxSpawnRateMultiplier())
+            {
+                currentSpawnRateMultiplier = newSpawnRateMultiplier;
+                UpdateAllSpawnersRate();
+            }
         }
         
         Debug.Log($"Difficulty increased! Speed: {CurrentZombieSpeed}, Spawn Rate Multiplier: {currentSpawnRateMultiplier}");
+    }
+    
+    private float GetMaxSpawnRateMultiplier()
+    {
+        return 4f;
     }
     
     private void UpdateAllZombiesSpeed()
@@ -114,5 +131,15 @@ public class DifficultyManager : MonoBehaviour
         currentSpawnRateMultiplier = 1f;
         UpdateAllZombiesSpeed();
         UpdateAllSpawnersRate();
+    }
+    
+    public bool IsMaxSpeedReached()
+    {
+        return CurrentZombieSpeed >= maxZombieSpeed;
+    }
+    
+    public bool IsMinSpawnIntervalReached()
+    {
+        return currentSpawnRateMultiplier >= GetMaxSpawnRateMultiplier();
     }
 }
