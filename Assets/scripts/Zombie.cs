@@ -15,7 +15,7 @@ public class Zombie : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private Transform target;
-    [SerializeField] private float speed = 2f;
+    [SerializeField] private float baseSpeed = 2f;
 
 
     [Header("Sprites")]
@@ -23,6 +23,7 @@ public class Zombie : MonoBehaviour
 
     private ScoreNGold scoreNGold;
     private SpriteRenderer spriteRenderer;
+    private float speed;
 
     void Awake()
     {
@@ -32,6 +33,7 @@ public class Zombie : MonoBehaviour
     void Start()
     {
         InitializeSprite();
+
         if (scoreNGold == null)
         {
             scoreNGold = FindFirstObjectByType<ScoreNGold>();
@@ -40,11 +42,26 @@ public class Zombie : MonoBehaviour
                 Debug.LogError("ScoreNGold component not found in the scene.");
             }
         }
+
+        if (DifficultyManager.Instance != null)
+        {
+            DifficultyManager.Instance.RegisterZombie(this);
+        }
+        else
+        {
+            speed = baseSpeed;
+        }
+
     }
 
     void Update()
     {
         HandleMovement();
+    }
+
+    public void UpdateSpeed(float newSpeed)
+    {
+        speed = newSpeed;
     }
     
     private void InitializeSprite()

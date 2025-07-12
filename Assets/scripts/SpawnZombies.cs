@@ -4,27 +4,36 @@ public class SpawnZombies : MonoBehaviour
 {
     [Header("Zombie Spawning")]
     [SerializeField] private GameObject zombiePrefab;
-    [SerializeField] private float spawnInterval = 3f;
+    [SerializeField] private float baseSpawnInterval = 3f;
     [SerializeField] private float spawnDistance = 2f;
     
     private Camera mainCamera;
     private float screenLeft, screenRight, screenTop, screenBottom;
+    private float currentSpawnInterval;
     
     void Start()
     {
         mainCamera = Camera.main;
         if (mainCamera == null)
-            mainCamera = Camera.main;
+            mainCamera = Camera.current;
             
         CalculateScreenBounds();
-        InvokeRepeating("SpawnLoop", 0f, spawnInterval);
+        currentSpawnInterval = baseSpawnInterval;
+        
+        // S'enregistrer auprès du gestionnaire de difficulté
+        if (DifficultyManager.Instance != null)
+        {
+            DifficultyManager.Instance.RegisterSpawner(this);
+        }
+        
+        InvokeRepeating("SpawnLoop", 0f, currentSpawnInterval);
     }
-
+    
     void CalculateScreenBounds()
     {
         Vector3 bottomLeft = mainCamera.ScreenToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane));
         Vector3 topRight = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.nearClipPlane));
-
+        
         screenLeft = bottomLeft.x;
         screenRight = topRight.x;
         screenBottom = bottomLeft.y;
@@ -74,5 +83,28 @@ public class SpawnZombies : MonoBehaviour
         }
         
         return position;
+    }
+    
+    public void UpdateSpawnRate(float spawnRateMultiplier, float minInterval)
+    {
+        float newInterval = baseSpawnInterval / spawnRateMultiplier;
+        newInterval = Mathf.Max(newInterval, minInterval);
+
+        if (Mathf.Abs(newInterval - currentSpawnInterval) > 0.01f)
+        {
+            currentSpawnInterval = newInterval;
+
+            CancelInvoke("SpawnLoop");
+            InvokeRepeating("SpawnLoop", 0f, currentSpawnInterval);
+        }
+    }
+    
+    void OnDestroy()
+    {
+        // Se désinscrire du gestionnaire de difficulté
+        if (DifficultyManager.Instance != null)
+        {
+            DifficultyManager.Instance.UnregisterSpawner(this);
+        }
     }
 }
