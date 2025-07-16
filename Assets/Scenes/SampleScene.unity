@@ -479,8 +479,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
-  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -606,39 +604,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 675667cd660980749b55a354b89fbe8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombiePrefab: {fileID: 8599146689795918813, guid: 3de3fcd586c394a48b703fe09fe455e7, type: 3}
-  baseSpawnInterval: 3
-  spawnDistance: 2
---- !u!114 &519420034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d724ae0a6c7c44d74a3a1e0374f4d0bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseZombieSpeed: 2
-  speedIncrement: 0.1
-  difficultyInterval: 5
-  scaleSpawnRate: 1
-  spawnRateDecrease: 0.1
-  minSpawnInterval: 0.5
 --- !u!1 &576598778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,6 +1018,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795747010}
   m_CullTransparentMesh: 1
+--- !u!1 &881024449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881024452}
+  - component: {fileID: 881024451}
+  - component: {fileID: 881024450}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &881024450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881024449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d724ae0a6c7c44d74a3a1e0374f4d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultyInterval: 5
+  baseZombieSpeed: 2
+  speedIncrement: 0.1
+  maxZombieSpeed: 10
+  scaleSpawnRate: 1
+  spawnRateDecrease: 0.1
+  minSpawnInterval: 0.5
+--- !u!114 &881024451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881024449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675667cd660980749b55a354b89fbe8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombiePrefab: {fileID: 8599146689795918813, guid: 3de3fcd586c394a48b703fe09fe455e7, type: 3}
+  baseSpawnInterval: 3
+  spawnDistance: 2
+--- !u!4 &881024452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881024449}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 87989.42, y: -5026.5312, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1073421359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,3 +2613,4 @@ SceneRoots:
   - {fileID: 1481784190}
   - {fileID: 1157486097}
   - {fileID: 754644625}
+  - {fileID: 881024452}

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2482193315270831924}
   - component: {fileID: -2932428074742627498}
   - component: {fileID: 7862871132254014261}
+  - component: {fileID: 7170623062024872859}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2526359768897291210, guid: 856bd63cea515c649b27c07e043fa210, type: 3}
-  speed: 1
+  baseSpeed: 2
   randomSprites:
   - sprite: {fileID: -5782521184205631276, guid: cc66f36fa0673764ab6927376159905c, type: 3}
     probability: 0.6
@@ -116,7 +117,6 @@ MonoBehaviour:
     probability: 0.1
   - sprite: {fileID: 320186988785587723, guid: 5062aa371ddc3aa429a47df65998031a, type: 3}
     probability: 0.05
-  scoreNGold: {fileID: 0}
 --- !u!114 &2482193315270831924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,3 +249,19 @@ PolygonCollider2D:
       - {x: 1.62, y: -0.96999997}
       - {x: 1.7099999, y: -0.84999996}
   m_UseDelaunayMesh: 0
+--- !u!114 &7170623062024872859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599146689795918813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2d6c92f12174c948eaa88f69df12f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
+  gameOverScreen: {fileID: 0}
+  gameOverSceneName: GameOver
+  useGameOverScreen: 1
