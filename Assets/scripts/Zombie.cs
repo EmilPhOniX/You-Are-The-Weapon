@@ -43,9 +43,9 @@ public class Zombie : MonoBehaviour
             }
         }
 
-        if (DifficultyManager.Instance != null)
+        if (DifficultyManager.InstanceDM != null)
         {
-            DifficultyManager.Instance.RegisterZombie(this);
+            DifficultyManager.InstanceDM.RegisterZombie(this);
         }
         else
         {

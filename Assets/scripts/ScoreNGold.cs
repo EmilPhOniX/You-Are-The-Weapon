@@ -1,13 +1,28 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScoreNGold : MonoBehaviour
 {
     [Header("Game Settings")]
+    public static ScoreNGold InstanceSNG;
     private int score = 0;
     private int gold = 0;
     private TextMeshProUGUI scoreText;
     private TextMeshProUGUI goldText;
+
+    [Header("UI Text References")]
+    private TextMeshProUGUI ActualSpeedText;
+    private TextMeshProUGUI ActualPenetrationText;
+    private TextMeshProUGUI ActualFireRateText;
+
+    private void Awake()
+    {
+        if (InstanceSNG == null)
+            InstanceSNG = this;
+        else
+            Destroy(gameObject);
+    }
 
     void Start()
     {
@@ -43,5 +58,14 @@ public class ScoreNGold : MonoBehaviour
     {
         scoreText.text = score.ToString();
         goldText.text = gold.ToString();
+
+        if (MarketScript.Market != null)
+            MarketScript.Market.UpdateMarketBtn();
+        else
+            Debug.LogWarning("MarketScript instance not found, cannot update market buttons.");
+        
+        
     }
+
+    public int GetGold() => gold;
 }

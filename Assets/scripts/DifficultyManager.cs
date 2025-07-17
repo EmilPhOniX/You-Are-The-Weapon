@@ -9,14 +9,14 @@ public class DifficultyManager : MonoBehaviour
     [Header("Speed Scaling")]
     [SerializeField] private float baseZombieSpeed = 2f;
     [SerializeField] private float speedIncrement = 0.1f;
-    [SerializeField] private float maxZombieSpeed = 10f; // Vitesse maximale des zombies
+    [SerializeField] private float maxZombieSpeed = 10f;
     
     [Header("Spawn Rate Scaling")]
     [SerializeField] private bool scaleSpawnRate = true;
-    [SerializeField] private float spawnRateDecrease = 0.1f; // Diminution de l'intervalle de spawn
-    [SerializeField] private float minSpawnInterval = 0.5f; // Intervalle minimum
+    [SerializeField] private float spawnRateDecrease = 0.1f;
+    [SerializeField] private float minSpawnInterval = 0.5f;
 
-    public static DifficultyManager Instance { get; private set; }
+    public static DifficultyManager InstanceDM { get; private set; }
     
     private float currentSpeedMultiplier = 1f;
     private float currentSpawnRateMultiplier = 1f;
@@ -28,15 +28,11 @@ public class DifficultyManager : MonoBehaviour
     
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
+        if (InstanceDM == null)
+            InstanceDM = this;
         else
-        {
             Destroy(gameObject);
             return;
-        }
     }
     
     void Start()
@@ -46,7 +42,6 @@ public class DifficultyManager : MonoBehaviour
     
     private void IncreaseDifficulty()
     {
-        // Limiter l'augmentation de vitesse
         float newSpeed = baseZombieSpeed * (currentSpeedMultiplier + speedIncrement);
         if (newSpeed <= maxZombieSpeed)
         {
@@ -113,9 +108,7 @@ public class DifficultyManager : MonoBehaviour
     public void RegisterSpawner(SpawnZombies spawner)
     {
         if (!spawners.Contains(spawner))
-        {
             spawners.Add(spawner);
-        }
     }
     
     public void UnregisterSpawner(SpawnZombies spawner)

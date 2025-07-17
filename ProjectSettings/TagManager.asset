@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - bullet
+  - SpeedPriceUI
+  - PenetrationPriceUI
+  - FireRatePriceUI
   layers:
   - Default
   - TransparentFX

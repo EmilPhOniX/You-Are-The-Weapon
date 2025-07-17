@@ -22,9 +22,9 @@ public class SpawnZombies : MonoBehaviour
         currentSpawnInterval = baseSpawnInterval;
         
         // S'enregistrer auprès du gestionnaire de difficulté
-        if (DifficultyManager.Instance != null)
+        if (DifficultyManager.InstanceDM != null)
         {
-            DifficultyManager.Instance.RegisterSpawner(this);
+            DifficultyManager.InstanceDM.RegisterSpawner(this);
         }
         
         InvokeRepeating("SpawnLoop", 0f, currentSpawnInterval);
@@ -103,9 +103,9 @@ public class SpawnZombies : MonoBehaviour
     void OnDestroy()
     {
         // Se désinscrire du gestionnaire de difficulté
-        if (DifficultyManager.Instance != null)
+        if (DifficultyManager.InstanceDM != null)
         {
-            DifficultyManager.Instance.UnregisterSpawner(this);
+            DifficultyManager.InstanceDM.UnregisterSpawner(this);
         }
     }
 }
